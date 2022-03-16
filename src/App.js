@@ -2,12 +2,18 @@ import './App.css';
 import Header from './components/Header';
 import SearchIcon from '@mui/icons-material/Search';
 import Country from './components/Country';
+import { Routes, Route } from 'react-router-dom';
+import CountryDetails from './components/CountryDetails';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <div className='app-body'>
+
+      <Routes>
+      <Route path='/' 
+      element={
+        <div className='app-body'>
         <div className='inputs'>
           <div className='search-input'>
             <SearchIcon />
@@ -29,6 +35,12 @@ function App() {
           <Country />
         </div>
       </div>
+      } 
+      />
+      <Route path='country-details' element={<CountryDetails />}/>
+
+    </Routes>
+     
     </div>
   );
 }
