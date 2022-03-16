@@ -2,7 +2,19 @@
   --dark-mode-elements: hsl(209, 23%, 22%);
   --dark-mode-bg: hsl(207, 26%, 17%);
   --light-mode-elements: #fff;
-  --light-mode-elements: hsl(0, 0%, 98%);
+  --light-mode-bg: hsl(0, 0%, 98%);
+}
+
+.app {
+  background-color: var(--light-mode-bg);
+  min-height: 100vh;
+  height: 100%;
+}
+
+.app-body {
+  margin: 15px auto 0;
+  padding: 15px;
+  max-width: 1400px;
 }
 
 .header {
@@ -11,7 +23,7 @@
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
-.header_container {
+.header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,11 +31,53 @@
   margin: 0 auto;
 }
 
-.switch_mode {
+.switch-mode {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   cursor: pointer;
   user-select: none;
+}
+
+.inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  width: 300px;
+  padding: 5px;
+  border-radius: 5px;
+  gap: 5px;
+}
+
+.search-input input {
+  border: 0;
+  background-color: transparent;
+  outline: none;
+  font-size: 18px;
+}
+
+.select-region {
+  width: 300px;
+  background-color: white;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  width: 300px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.select-region select {
+  padding: 5px;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
 }
