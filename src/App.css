@@ -12,8 +12,8 @@
 }
 
 .app.darkMode {
-  background-color: var(--dark-mode-bg);
   color: white;
+  background-color: var(--dark-mode-bg);
 }
 
 .app-body {
@@ -26,6 +26,11 @@
   background-color: white;
   padding: 15px;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+.header.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: white;
 }
 
 .header-container {
@@ -55,28 +60,72 @@
   display: flex;
   background-color: white;
   width: 300px;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  padding: 5px;
+  padding: 10px;
   border-radius: 5px;
   gap: 5px;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+.search-input.darkMode {
+  color: white;
+  background-color: var(--dark-mode-elements);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: black;
+}
+
+.darkMode ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+.darkMode :-ms-input-placeholder.darkMode { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+.darkMode ::-ms-input-placeholder .darMode { /* Microsoft Edge */
+  color: white;
+}
+
+
+.search-input.darkMode input {
+  color: white;
+  background-color: var(--dark-mode-elements);
 }
 
 .search-input input {
   border: 0;
   outline: none;
   background-color: transparent;
-  font-size: 18px;
+  font-size: 14px;
+  color: rgb(61, 35, 35);
 }
+
 
 .select-region {
   background-color: white;
-  width: 300px;
-  width: 300px;
+  width: 200px;
+  
   border-radius: 5px;
   padding: 5px;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+.select-region.darkMode {
+  background-color: var(--dark-mode-elements);
+  color: white;
+
 }
 
 .select-region select {
@@ -85,6 +134,15 @@
   border: none;
   outline: none;
   background-color: transparent;
+ 
+}
+
+option {
+  background-color: white;
+}
+
+.select-region.darkMode select {
+  color: white;
 }
 
 .countries {
@@ -109,6 +167,7 @@ flex-wrap: wrap;
 .country.darkMode {
   background-color: var(--dark-mode-elements);
   color: white;
+ 
 }
 
 .country .flag-container {
@@ -143,8 +202,8 @@ flex-wrap: wrap;
 }
 
 .country-details {
-  padding: 15px;
-  margin: 15px auto 0;
+  padding: 10px;
+  margin: 10px auto 0;
   min-height: 100vh;
   max-width: 1400px;
 }
@@ -153,7 +212,7 @@ flex-wrap: wrap;
   border: 0;
   background-color: white;
   outline: 0;
-  width: 160px;
+  width: 130px;
   margin-bottom: 25px;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
   justify-content: center;
@@ -174,6 +233,7 @@ flex-wrap: wrap;
   margin: 15px auto 0;
   padding: 15px;
   max-width: 1400px;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,23 +255,24 @@ flex-wrap: wrap;
 
 .info {
   flex: 0.5;
+  
 }
 
 .info.darkMode {
   color: white;
-
 }
 
 .info-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 45px;
+  margin-bottom: 25px;
+  
   
 }
 
 .info h2 {
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .info .values {
@@ -219,6 +280,7 @@ flex-wrap: wrap;
 }
 
 .info .values.darkMode {
+
   color: lightgrey;
 }
 
@@ -236,3 +298,39 @@ flex-wrap: wrap;
   color: white;
 }
 
+@media (max-width: 800px) {
+  .country-details-body {
+    flex-direction: column;
+  }
+
+  .info-container {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .left-side-info {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 720px) {
+  .inputs {
+    margin-bottom: 15px;
+    flex-direction: column;
+  }
+
+  .search-input {
+    margin-bottom: 20px;
+  }
+
+  .switch-mode {
+    flex: 0.5;
+    justify-content: flex-end;
+    font-size: 12px;
+  }
+
+  .logo {
+    font-size: 17px;
+    flex: 0.5;
+  }
+}

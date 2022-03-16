@@ -1,7 +1,7 @@
 import React from 'react'
 
-function Country() {
-  return <div className='country'>
+function Country({ darkMode }) {
+  return <div className={`country ${darkMode ? 'darkMode' : ''}`}>
       <div className='flag-container'>
           <img src='https://flagcdn.com/us.svg' alt='' />
       </div>
@@ -10,15 +10,15 @@ function Country() {
           <h3 className='name'>Name</h3>
           <p>
               Population:{' '}
-          <span className='values'>Test</span>
+          <span className={`values ${darkMode ? 'darkMode' : ''}`}>Test</span>
           </p>
           <p>
               Region:{' '}
-          <span className='values'>Test</span>
+          <span className={`values ${darkMode ? 'darkMode' : ''}`}>Test</span>
           </p>
           <p>
               Capital:{' '}
-          <span className='values'>Test</span>
+          <span className={`values ${darkMode ? 'darkMode' : ''}`}>Test</span>
           </p>
        
       </div>
