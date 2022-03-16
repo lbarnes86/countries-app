@@ -1,5 +1,5 @@
 import React from 'react';
-import DarkModeIcon from '@mui/icons-material/DarkMode'
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
 
 function Header() {
   return (
@@ -7,8 +7,8 @@ function Header() {
         <div className='header-container'>
             <h2 className='logo'>Where in the world?</h2>
             <div className='switch-mode'>
-                <DarkModeIcon />
-                <h3>Dark Mode</h3>
+                <DarkModeOutlinedIcon />
+                <h4>Dark Mode</h4>
             </div>
         </div>
     </div>
