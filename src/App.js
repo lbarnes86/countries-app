@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Header from './components/Header';
 import SearchIcon from '@mui/icons-material/Search';
@@ -9,6 +9,11 @@ import CountryDetails from './components/CountryDetails';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [countries, setCountries] = useState([]);
+  const countriesInputRef = useRef();
+  const regionRef = useRef();
+  
+  const countryUnlisted = countries.status || countries.message;
+
   const switchMode = () => (
     setDarkMode(prevState => !prevState)
 
@@ -20,17 +25,71 @@ function App() {
     } catch (error) {
       console.log(error)
     }
-  });
+  }, []);
 
   const fetchData = async () => {
     const response = await fetch("https://restcountries.com/v2/all");
     const data = await response.json();
 
+    if (data.status === 404) {
+      setCountries([]);
+      return;
+    }
+
     setCountries(data);
   };
   // console.log(countries)
 
-  return (
+  const searchCountries = () => {
+    const searchValue = countriesInputRef.current.value;
+
+    if (searchValue.trim()) {
+      const fetchSearch = async () => {
+        const response = await fetch(`https://restcountries.com/v2/name/${searchValue}`)
+        const data = await response.json();
+
+        setCountries(data);
+      }
+
+      try {
+        fetchSearch()
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      fetchData();
+    }
+  }
+
+  const selectRegion = () => {
+    const selectValue = regionRef.current.value;
+    if (selectValue.trim()) {
+      const fetchSelect = async () => {
+        const response = await fetch(`https://restcountries.com/v2/region/${selectValue}`);
+        const data = await response.json();
+
+        if (selectValue === "All") {
+          try {
+            fetchData()
+          } catch (error) {
+            console.log(error)
+          }
+          return;
+        }
+
+        setCountries(data);
+
+      } 
+      try {
+        fetchSelect();
+      } catch(error) {
+        console.log(error)
+      }
+
+    }
+  }
+
+  return ( 
     <div className={`app ${darkMode ? 'darkMode' : ''}`}>
       <Header onClick={switchMode} darkMode={darkMode} />
 
@@ -41,10 +100,10 @@ function App() {
         <div className='inputs'>
           <div className={`search-input ${darkMode ? 'darkMode' : ''}`}>
             <SearchIcon />
-            <input type='text' placeholder='Search for a country...' />
+            <input type='text' placeholder='Search for a country...' ref={countriesInputRef} onChange={searchCountries} />
           </div>
           <div className={`select-region ${darkMode ? 'darkMode' : ''}`}>
-            <select>
+            <select ref={regionRef} onChange={selectRegion}>
               <option>Filter by Region</option>
               <option>Africa</option>
               <option>Americas</option>
@@ -56,8 +115,10 @@ function App() {
           </div>
         </div>
         <div className='countries'>
-        {countries.map(country => (
-            <Country darkMode={darkMode}
+        {!countryUnlisted ? (
+          countries.map((country) => (
+            <Country 
+            darkMode={darkMode}
             key={country.alpha3Code}
             code={country.alpha3Code}
             name={country.name}
@@ -70,10 +131,11 @@ function App() {
             topLevelDomain={country.topLevelDomain}
             currencies={country.currencies}
             languages={country.languages}
-
-
             />
-          ))}
+          ))
+        ) : (
+          <p>No countries found...</p>
+        ) }
         </div>
       </div>
       } 

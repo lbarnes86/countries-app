@@ -1,24 +1,24 @@
 import React from 'react'
 
-function Country({ darkMode }) {
+function Country({ darkMode, name, population, region, capital, flag}) {
   return <div className={`country ${darkMode ? 'darkMode' : ''}`}>
       <div className='flag-container'>
-          <img src='https://flagcdn.com/us.svg' alt='' />
+          <img src={flag} alt='' />
       </div>
 
       <div className='details'>
-          <h3 className='name'>Name</h3>
+          <h3 className='name'>{name}</h3>
           <p>
               Population:{' '}
-          <span className={`values ${darkMode ? 'darkMode' : ''}`}>Test</span>
+          <span className={`values ${darkMode ? 'darkMode' : ''}`}>{population}</span>
           </p>
           <p>
               Region:{' '}
-          <span className={`values ${darkMode ? 'darkMode' : ''}`}>Test</span>
+          <span className={`values ${darkMode ? 'darkMode' : ''}`}>{region}</span>
           </p>
           <p>
               Capital:{' '}
-          <span className={`values ${darkMode ? 'darkMode' : ''}`}>Test</span>
+          <span className={`values ${darkMode ? 'darkMode' : ''}`}>{capital}</span>
           </p>
        
       </div>
