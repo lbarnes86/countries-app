@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './App.css';
+import { useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import SearchIcon from '@mui/icons-material/Search';
 import Country from './components/Country';
@@ -11,6 +12,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const countriesInputRef = useRef();
   const regionRef = useRef();
+  const navigate = useNavigate();
   
   const countryUnlisted = countries.status || countries.message;
 
@@ -63,12 +65,13 @@ function App() {
 
   const selectRegion = () => {
     const selectValue = regionRef.current.value;
+    
     if (selectValue.trim()) {
       const fetchSelect = async () => {
         const response = await fetch(`https://restcountries.com/v2/region/${selectValue}`);
         const data = await response.json();
 
-        if (selectValue === "All") {
+        if (selectValue === 'all') {
           try {
             fetchData()
           } catch (error) {
@@ -89,6 +92,10 @@ function App() {
     }
   }
 
+  const showDetails = (code) => {
+    navigate(`/${code}`);
+  }
+
   return ( 
     <div className={`app ${darkMode ? 'darkMode' : ''}`}>
       <Header onClick={switchMode} darkMode={darkMode} />
@@ -104,7 +111,7 @@ function App() {
           </div>
           <div className={`select-region ${darkMode ? 'darkMode' : ''}`}>
             <select ref={regionRef} onChange={selectRegion}>
-              <option>Filter by Region</option>
+              <option value='all'>Filter by Region</option>
               <option>Africa</option>
               <option>Americas</option>
               <option>Asia</option>
@@ -131,6 +138,7 @@ function App() {
             topLevelDomain={country.topLevelDomain}
             currencies={country.currencies}
             languages={country.languages}
+            showDetails={showDetails}
             />
           ))
         ) : (
@@ -140,7 +148,8 @@ function App() {
       </div>
       } 
       />
-      <Route path='country-details' element={<CountryDetails darkMode={darkMode} />}/>
+      <Route path='/:countryCode' 
+      element={<CountryDetails darkMode={darkMode} countries={countries} />}/>
 
     </Routes>
      
