@@ -30,14 +30,14 @@ function CountryDetails({ darkMode, countries }) {
       capital = country.capital;
       topLevelDomain = country.topLevelDomain;
     
-      country.currencies.forEach(currency => {
-        currencies.push(currency.name)
+      country.currencies?.forEach((currency) => {
+        currencies.push(currency.name);
       })
-      country.languages.forEach(language => {
-        languages.push(language.name)
+      country.languages?.forEach((language) => {
+        languages.push(language.name);
       })
-      country.borders?.forEach(border => {
-        borders.push(border.name)
+      country.borders?.forEach((border) => {
+        borders.push(border.name);
       })
       
      
@@ -99,7 +99,7 @@ function CountryDetails({ darkMode, countries }) {
               </span>
             </p>
             <p>
-              Currencies:{' '}
+              Currencies:
               {currencies.map(currency => {
                 if (currencies.indexOf(currency) !== currencies.length -1) {
                   return (
@@ -107,7 +107,7 @@ function CountryDetails({ darkMode, countries }) {
                       {' '}
                       {currency},
                     </span>
-                    )
+                    );
                   } else {
                     return (
                       <span className={`values ${darkMode ? 'darkMode' : ''}`}>
@@ -119,25 +119,46 @@ function CountryDetails({ darkMode, countries }) {
                 })}
             
             </p>
-            <p>Languages:{' '}
-            <span className={`values ${darkMode ? 'darkMode' : ''}`}>
-              {languages}
-              </span>
+            <p>
+              Languages:
+            {languages.map((language) => {
+              if (languages.indexOf(language) !== language.length - 1) {
+                return (
+                  <span
+                  key={language}
+                  className={`values ${darkMode ? 'darkMode' : ""}`}
+                  >
+                    {' '}
+                    {language},
+                    </span>
+                );
+              } else {
+                return (
+                  <span
+                    key={language}
+                    className={`values ${darkMode ? 'darkMode' : ''}`}
+                  >
+                    {' '}
+                    {language}
+                  </span>
+                );
+              }
+            })}
+
             </p>
           </div>
         </div>
         Border Countries:
-        <div className={`border-country ${darkMode ? 'darkMode' : ''}`}>
-          <p>{borders}
-            
-          </p>
-        </div>
-        <div className={`border-country ${darkMode ? 'darkMode' : ''}`}>
-          <p>{borders}</p>
-        </div>
-        <div className={`border-country ${darkMode ? 'darkMode' : ''}`}>
-          <p>{borders}</p>
-        </div>
+        
+        {borders.length ? (
+          borders.map(border => (
+            <div className={`border-country ${darkMode ? 'darkMode' : ''}`}>
+              <p>{border}</p>
+            </div>
+
+          ))
+        )}
+
       </div>
       </div>
     </div>
