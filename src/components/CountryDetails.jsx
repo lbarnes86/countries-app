@@ -3,7 +3,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useParams, useNavigate } from 'react-router'
 
 
-function CountryDetails({ darkMode, countries }) {
+function CountryDetails({ darkMode, countries, refetch }) {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ function CountryDetails({ darkMode, countries }) {
         languages.push(language.name);
       })
       country.borders?.forEach((border) => {
-        borders.push(border.name);
+        borders.push(border);
       })
       
      
@@ -151,12 +151,22 @@ function CountryDetails({ darkMode, countries }) {
         Border Countries:
         
         {borders.length ? (
-          borders.map(border => (
-            <div className={`border-country ${darkMode ? 'darkMode' : ''}`}>
-              <p>{border}</p>
+          borders.map((border) => (
+            <div className={`border-country ${darkMode ? 'darkMode' : ''}`}
+            onClick={() => {
+              refetch();
+              navigate(`/${border}`)
+            }}
+            
+            >
+              {border}
             </div>
 
           ))
+        ) : (
+          <div className={`values ${darkMode ? 'darkMode' : ''}`}>
+              <p>No borders...</p>
+            </div>
         )}
 
       </div>
