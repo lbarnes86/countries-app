@@ -101,7 +101,7 @@ function App() {
       <Header onClick={switchMode} darkMode={darkMode} />
 
       <Routes>
-      <Route path='/' 
+      <Route path='/countries-app' 
       element={
         <div className='app-body'>
         <div className='inputs'>

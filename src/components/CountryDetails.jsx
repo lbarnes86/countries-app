@@ -46,7 +46,7 @@ function CountryDetails({ darkMode, countries, refetch }) {
 
 
   const goBack = () => {
-    navigate('/');
+    navigate('/countries-app');
   }
 
 
